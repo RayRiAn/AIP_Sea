@@ -8,17 +8,29 @@ router.get('/', function(req, res, next) {
 
 /* Страница Азовского моря */
 router.get('/azov', function(req, res, next) {
-  res.send("<h1>Азовское море</h1>")
+  res.render('sea', {
+    title: 'Азовское море',
+    picture: '/images/AzovskoeMore.jpg',
+    desc: 'Азовское море — самое мелкое море в мире. Средняя глубина — около 7 метров, максимальная — 14 метров. Омывает берега России и Украины.'
+  });
 });
 
 /* Страница Балтийского моря */
 router.get('/baltic', function(req, res, next) {
-  res.send("<h1>Балтийское море</h1>")
+  res.render('sea', {
+    title: 'Балтийское море',
+    picture: '/images/BaltiiskoeMore.jpg',
+    desc: 'Балтийское море — внутриматериковое море Атлантического океана. Омывает берега России, Финляндии, Швеции, Германии, Польши, Литвы, Латвии, Эстонии и Дании.'
+  });
 });
 
 /* Страница Чёрного моря */
 router.get('/black', function(req, res, next) {
-  res.send("<h1>Чёрное море</h1>")
+  res.render('sea', {
+    title: 'Чёрное море',
+    picture: '/images/ChernoeMore.jpg',
+    desc: 'Чёрное море — внутреннее море бассейна Атлантического океана. Омывает берега России, Украины, Румынии, Болгарии, Турции, Грузии и Абхазии. Средняя глубина — 1240 метров.'
+  });
 });
 
 module.exports = router;
