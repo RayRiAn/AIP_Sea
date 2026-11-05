@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+var data = require("./data.js").data;
 
 // Адрес нашей локальной базы данных
 const url = 'mongodb://localhost:27017';
