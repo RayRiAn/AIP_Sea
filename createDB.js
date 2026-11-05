@@ -1,23 +1,27 @@
 const { MongoClient } = require('mongodb');
 var data = require("./data.js").data;
 
-// Адрес нашей локальной базы данных
+// Connection URL
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 
-// Имя базы данных
+// Database Name
 const dbName = 'sea2026';
 
 async function main() {
-  // Подключаемся к серверу
   await client.connect();
   console.log('Успешное подключение к серверу');
 
   const db = client.db(dbName);
-  const collection = db.collection('documents');
+  
+  // ВАЖНО: называем коллекцию 'seas' (моря)
+  const collection = db.collection('seas');
 
-  // Добавляем тестовые документы
-  const insertResult = await collection.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }]);
+  // Очищаем коллекцию перед записью (на случай, если там что-то было)
+  await collection.deleteMany({});
+
+  // Записываем данные из data.js
+  const insertResult = await collection.insertMany(data);
   console.log('Добавленные документы =>', insertResult);
 
   return 'done.';
