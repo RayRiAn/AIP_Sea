@@ -1,14 +1,23 @@
 const mongoose = require('mongoose');
-
-// Подключаемся к нашей базе (год 2026)
+// Подключаемся к базе sea2026
 mongoose.connect('mongodb://127.0.0.1:27017/sea2026');
 
-// Создаем модель (схему) для теста. 
-// Mongoose сам сделает из 'Dolphin' коллекцию 'dolphins'
-const Dolphin = mongoose.model('Dolphin', { name: String, color: String });
+// 1. Создаем схему, 
+var schema = mongoose.Schema({ 
+  name: String, 
+  color: String 
+});
 
-// Создаем экземпляр
+// 2. Добавляем метод в схему 
+schema.methods.swim = function() {
+  console.log(this.name + " весело плавает в море!");
+};
+
+// 3. Создаем модель на основе схемы
+const Dolphin = mongoose.model('Dolphin', schema);
+
+// 4. Создаем экземпляр и сохраняем
 const myDolphin = new Dolphin({ name: 'Флиппер', color: 'Серый' });
 
-// Сохраняем в базу
-myDolphin.save().then(() => console.log('Дельфин успешно сохранен в базу! 🐬'));
+// 5. Сохраняем и вызываем наш метод
+myDolphin.save().then(() => myDolphin.swim());
